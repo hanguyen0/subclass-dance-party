@@ -1,37 +1,28 @@
-class BlinkyDancer extends Dancer {//Animal.call(this)
+var BlinkyDancer = function (top, left, timeBetweenSteps) {
   //Any properties specific for a blinky dancer
-  constructor(top, left, timeBetweenSteps) {
-    super(top, left, timeBetweenSteps);
-    // this.$node = $('<span class="blinkyDancer"></span>');
-    // this.$node.css({ "top": top, "left": left });
-  }
+  Dancer.call(this, top, left, timeBetweenSteps);
   //$node, step
   // var blinkyDancer = makeDancer(top, left, timeBetweenSteps);
+};
 
-  // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
+BlinkyDancer.prototype = Object.create(Dancer.prototype);
+BlinkyDancer.prototype.constructor = BlinkyDancer;
 
-  // so we must keep a copy of the old version of this function
+// var oldStep = blinkyDancer.step;
 
-  // var oldStep = this.step;
 
-  // call the old version of step at the beginning of any call to this new version of step
-  step() {
+// we plan to overwrite the step function below, but we still want the superclass step behavior to work,
 
-    this.$node.toggle();
-    this.$node.css({ "color": "white"});
-  }
+// so we must keep a copy of the old version of this function
+
+// var oldStep = this.step;
+
+// call the old version of step at the beginning of any call to this new version of step
+BlinkyDancer.prototype.step = function () {
+  Dancer.prototype.step();
+  this.$node.toggle();
+  // this.$node.css({ "color": "white"});
+}
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
-
-};
-// var oldStep = blinkyDancer.step;
-
-//   blinkyDancer.step = function() {
-//     // call the old version of step at the beginning of any call to this new version of step
-//     oldStep();
-//     // toggle() is a jQuery method to show/hide the <span> tag.
-//     // See http://api.jquery.com/category/effects/ for this and
-//     // other effects you can use on a jQuery-wrapped html tag.
-//     blinkyDancer.$node.toggle();
-//   };
